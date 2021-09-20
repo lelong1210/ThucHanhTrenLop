@@ -1,0 +1,13 @@
+.header , .footer{
+    background-color: tomato;
+    height: 100px;
+}
+#FormUpdate{
+    display: none;
+}
+#FormSell{
+    display: none;
+}
+#NutThanhToan{
+    display: none;
+}
