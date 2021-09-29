@@ -1,0 +1,16 @@
+.header , .footer{
+    background-color: tomato;
+    height: 100px;
+}
+.content{
+    /*background-image: url("../img/dra.jpg");*/
+    height: 100px;
+}
+.zoom{
+    border-style: double;
+    height: 200px;
+    max-width: 200px;
+}
+.footer{
+    margin-top: 10%;
+}

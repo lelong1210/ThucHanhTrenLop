@@ -1,0 +1,28 @@
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+  
+.background{
+    /* The image used */
+    background-image: url("../img/backGround_LR.jpg");
+    /*background-color: rgb(255, 145, 2);*/
+    opacity: 0.5;
+    /* Full height */
+    height: 100%; 
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.Noficatification_Login_Register{
+    display: none;
+}
+span{
+    color: red;
+}
+.colorText{
+    color: red;
+}
