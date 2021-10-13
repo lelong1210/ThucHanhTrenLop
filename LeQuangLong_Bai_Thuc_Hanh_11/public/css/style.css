@@ -1,0 +1,15 @@
+table, th, td {
+    border: 1px solid black;
+}
+#inputSV{
+    display: none;
+}
+#inputXoa{
+    display: none;
+}
+#inputSua{
+    display: none;
+}
+#inputTimKiem{
+    display: none;
+}
