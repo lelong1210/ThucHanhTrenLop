@@ -43,6 +43,27 @@ class ajax extends controller{
             echo false;
         }       
     }
+    function showAllStudentWhereNameXoa(){
+        // $masv = $_POST["masv"];
+        $tenthisinh = $_POST["tenthisinh"];
+        $model = $this->call_model("homeModel");
+        echo ($model->showAllStudentWhereNameXoa($tenthisinh));       
+    }
+
+    function showAllStudentWhereNameTK(){
+        // $masv = $_POST["masv"];
+        $tenthisinh = $_POST["tenthisinh"];
+        $model = $this->call_model("homeModel");
+        echo ($model->showAllStudentWhereNameTK($tenthisinh));      
+    }
+
+
+    function showAllStudentWhereName(){
+        // $masv = $_POST["masv"];
+        $tenthisinh = $_POST["tenthisinh"];
+        $model = $this->call_model("homeModel");
+        echo ($model->showAllStudentWhereName($tenthisinh));       
+    }
 
     function selectOneStudentsWhereTongDiem(){
         $tongdiem = $_POST["tongdiemtim"];

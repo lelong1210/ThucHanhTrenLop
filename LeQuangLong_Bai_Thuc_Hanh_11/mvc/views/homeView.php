@@ -33,6 +33,7 @@
             <button id="showinputXoa">Xóa</button>
             <button id="showinputSua">Sửa</button>
             <button id="showinputTimKiem">Tìm Kiếm</button>
+            <!-- <button id="test">TEST</button> -->
             <!-- </div> -->
         </div>
         <div class="inputSV col-sm-6">

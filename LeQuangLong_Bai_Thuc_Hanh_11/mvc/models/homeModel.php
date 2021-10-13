@@ -51,6 +51,22 @@ class homeModel extends connectDB{
             return false;
         }
     }
+
+    function selectSinhVienWhereName($tenthisinh){
+        $conn = $this->GetConn();
+        $tenthisinh = "%".$tenthisinh."%";
+        $sql = "SELECT * FROM thisinh WHERE tenthisinh LIKE :tenthisinh";
+        $query = $conn->prepare($sql);
+        $query->bindParam(":tenthisinh",$tenthisinh);
+        $query->execute();
+        if($query->rowCount() > 0){
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            return json_encode($result);
+        }else{
+            return false;
+        }        
+    }
+
     function updateStudents($mathisinh,$tenthisinh,$ngaysinh,$quequan,$tongdiem){
         $conn = $this->GetConn();
         $sql = "UPDATE thisinh SET tenthisinh = :tenthisinh, ngaysinh = :ngaysinh, quequan = :quequan, tongdiem = :tongdiem WHERE mathisinh = :mathisinh";
@@ -131,8 +147,8 @@ class homeModel extends connectDB{
         echo "<table>";
             for ($i=0; $i < 1; $i++) {
                 echo "<tr>"; 
-                    echo "<th>$arrTitle[$i]</th>";
-                    echo "<th><input type='text' id='$arrTitle[$i]xoa'></th>";
+                    echo "<th>$arrTitle[1]</th>";
+                    echo "<th><input type='text' id='$arrTitle[1]xoa'></th>";
                 echo "</tr>";
             }
         echo "</table>";     
@@ -145,8 +161,8 @@ class homeModel extends connectDB{
         echo "<table>";
             for ($i=0; $i < 1; $i++) {
                 echo "<tr>"; 
-                    echo "<th>$arrTitle[$i]</th>";
-                    echo "<th><input type='text' id='suaTai' placeholder='nhập mã sinh viên muốn Sửa...'></th>";
+                    echo "<th>$arrTitle[1]</th>";
+                    echo "<th><input type='text' id='suaTai' placeholder='nhập tên sinh viên muốn Sửa...'></th>";
                 echo "</tr>";
             }
         echo "</table>";     
@@ -168,6 +184,74 @@ class homeModel extends connectDB{
         echo "</table>";     
         echo "<button id='sua'>Sửa</button>"; 
     }
+    function showAllStudentWhereNameTK($tenthisinh){
+        $arr = array_values((array)json_decode($this->selectSinhVienWhereName($tenthisinh)));
+        $arrTitle = $this->getTitle($arr);
+        $count = count($arr);
+        $countTitle = count($arrTitle);
+        echo "<table class='table'>";
+            echo "<tr>";
+                for ($i=0; $i < $countTitle; $i++) { 
+                    echo "<th>$arrTitle[$i]</th>";
+                }
+            echo "</tr>";
+            for ($i=0; $i < $count; $i++) { 
+                echo "<tr>";
+                    $arrChild = array_values((array)$arr[$i]);
+                    for ($j=0; $j < $countTitle; $j++) { 
+                        echo "<td>$arrChild[$j]</td>";
+                    }
+                echo "</tr>";
+            }
+        echo "</table>";         
+    }
+    function showAllStudentWhereName($tenthisinh){
+        $arr = array_values((array)json_decode($this->selectSinhVienWhereName($tenthisinh)));
+        $arrTitle = $this->getTitle($arr);
+        $count = count($arr);
+        $countTitle = count($arrTitle);
+        echo "<table class='table'>";
+            echo "<tr>";
+                for ($i=0; $i < $countTitle; $i++) { 
+                    echo "<th>$arrTitle[$i]</th>";
+                }
+                echo "<th>Sửa</th>";
+            echo "</tr>";
+            for ($i=0; $i < $count; $i++) { 
+                echo "<tr>";
+                    $arrChild = array_values((array)$arr[$i]);
+                    for ($j=0; $j < $countTitle; $j++) { 
+                        echo "<td>$arrChild[$j]</td>";
+                    }
+                    echo "<td><button id='$arrChild[0]'>Sửa</button></td>";
+                echo "</tr>";
+            }
+        echo "</table>";        
+    }
+    function showAllStudentWhereNameXoa($tenthisinh){
+        $arr = array_values((array)json_decode($this->selectSinhVienWhereName($tenthisinh)));
+        $arrTitle = $this->getTitle($arr);
+        $count = count($arr);
+        $countTitle = count($arrTitle);
+        echo "<table class='table'>";
+            echo "<tr>";
+                for ($i=0; $i < $countTitle; $i++) { 
+                    echo "<th>$arrTitle[$i]</th>";
+                }
+                echo "<th>Sửa</th>";
+            echo "</tr>";
+            for ($i=0; $i < $count; $i++) { 
+                echo "<tr>";
+                    $arrChild = array_values((array)$arr[$i]);
+                    for ($j=0; $j < $countTitle; $j++) { 
+                        echo "<td>$arrChild[$j]</td>";
+                    }
+                    echo "<td><button id='$arrChild[0]'>Xóa</button></td>";
+                echo "</tr>";
+            }
+        echo "</table>";        
+    }
+
 
     function showAllStudentWhereTongDiem($tongdiem){
         $arr = array_values((array)json_decode($this->selectOneStudentsWhereTongDiem($tongdiem)));

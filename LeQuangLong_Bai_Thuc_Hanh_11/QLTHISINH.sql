@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 13, 2021 at 04:12 AM
+-- Generation Time: Oct 13, 2021 at 05:48 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -44,8 +44,8 @@ INSERT INTO `thisinh` (`mathisinh`, `tenthisinh`, `ngaysinh`, `quequan`, `tongdi
 (2, 'le quang linh', '2002-10-12', 'quang binh', 29),
 (3, 'le viet huong', '2002-10-12', 'quang binh', 20),
 (4, 'pham quang thanh', '2002-10-12', 'quang binh', 29),
-(5, 'le quang son', '2002-10-12', 'quang binh', 27),
-(6, 'nguyen van long', '2002-10-12', 'quang binh', 29),
+(5, 'le quang son', '2002-10-12', 'quang binh', 29),
+(6, 'nguyen van long', '2002-10-12', 'quang binh', 30),
 (7, 'le quang thanh cong ', '2002-12-10', 'quang binh', 27),
 (8, 'le quang linh linh nhi', '2002-12-10', 'quang binh', 29);
 
@@ -67,7 +67,7 @@ ALTER TABLE `thisinh`
 -- AUTO_INCREMENT for table `thisinh`
 --
 ALTER TABLE `thisinh`
-  MODIFY `mathisinh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `mathisinh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
