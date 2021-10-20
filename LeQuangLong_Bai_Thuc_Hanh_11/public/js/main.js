@@ -107,7 +107,7 @@ $(document).ready(function () {
         });
     });
     function Update(masv) {
-        var tenthisinh = $("#tenthisinhsua").val();
+        var tenthisinh = $("#tenthisinhsua").val()+" ";
         var ngaysinh = $("#ngaysinhsua").val();
         var quequan = $("#quequansua").val();
         var tongdiem = $("#tongdiemsua").val();
