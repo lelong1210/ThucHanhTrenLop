@@ -1,5 +1,6 @@
 <?php
-class bai1{
+class bai1
+{
     protected $servername = "localhost";
     protected $username = "root";
     protected $password  = "";
@@ -12,7 +13,8 @@ class bai1{
     protected $sqlSelectDB1 = "SELECT MAX(PRICE*QUANTITY)  FROM Products";
     protected $sqlSelectDB2 = "SELECT NAME,(PRICE*QUANTITY) AS SUM FROM Products WHERE (PRICE*QUANTITY)=:max ORDER BY NAME DESC";
     protected $sqlAll = "SELECT * FROM Products ORDER BY ID DESC";
-    function __construct(){
+    function __construct()
+    {
         // // create dabase 
         //     $this->createDATABASE();
         // // create table
@@ -24,31 +26,53 @@ class bai1{
         //     $this->insert($this->sqlInsert4);
         //     $this->insert($this->sqlInsert5);
         // // thuc hien cau hoi
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        //
+        echo date_default_timezone_get();
+        echo "<br>";
+
+        echo date("l") . "<br>";
+
+        // Prints the day, date, month, year, time, AM or PM
+        echo date("l jS \of F Y h:i:s A") . "<br>";
+        
+        // Prints October 3, 1975 was on a Friday
+        echo "Oct 3,1975 was on a ".date("l", mktime(0,0,0,10,3,1975)) . "<br>";
+        
+        // Use a constant in the format parameter
+        echo date(DATE_RFC822) . "<br>";
+        
+        // prints something like: 1975-10-03T00:00:00+00:00
+        echo date(DATE_ATOM,mktime(0,0,0,10,3,1975));
+
         echo "<h2>GOC</h2>";
         $this->showtableALL($this->sqlAll);
         echo "<br>";
         echo "<h2>KET QUA</h2>";
         $this->showtable();
     }
-    function getConn(){
-        $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname",$this->username,$this->password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        return $conn ;
+    function getConn()
+    {
+        $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conn;
     }
-    function createDATABASE(){
-        try{
-            $conn = new PDO("mysql:host=$this->servername",$this->username,$this->password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    
+    function createDATABASE()
+    {
+        try {
+            $conn = new PDO("mysql:host=$this->servername", $this->username, $this->password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
             $sql = "CREATE DATABASE STUDENT";
             $conn->exec($sql);
             echo "create database successfully";
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
-    function creataTable(){
-        try{
+    function creataTable()
+    {
+        try {
             $conn = $this->getConn();
             $sql = "CREATE TABLE Products(
                 ID INT(11) AUTO_INCREMENT NOT NULL,
@@ -59,108 +83,112 @@ class bai1{
             )";
             $conn->exec($sql);
             echo "create table success";
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
-    function insert($sql){
-        try{
+    function insert($sql)
+    {
+        try {
             $conn = $this->getConn();
             $query = $conn->prepare($sql);
             $query->execute();
-            if($query->rowCount() > 0){
+            if ($query->rowCount() > 0) {
                 echo "insert successfully";
-            }else{
+            } else {
                 echo "insert failt";
             }
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
-    function getMax($sql){
-        try{
+    function getMax($sql)
+    {
+        try {
             $conn = $this->getConn();
             $query = $conn->prepare($sql);
             $query->execute();
-            if($query->rowCount() > 0){
+            if ($query->rowCount() > 0) {
                 $arr = $query->fetchAll(PDO::FETCH_ASSOC);
                 $arr = array_values((array)$arr[0]);
                 return $arr[0];
-            }else{
+            } else {
                 echo "failt";
             }
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo $e->getMessage();
-        }        
+        }
     }
-    function selectheoDeBai($sql){
-        try{
+    function selectheoDeBai($sql)
+    {
+        try {
             $max = $this->getMax($this->sqlSelectDB1);
             $conn = $this->getConn();
             $query = $conn->prepare($sql);
-            $query->bindParam(":max",$max);
+            $query->bindParam(":max", $max);
             $query->execute();
-            if($query->rowCount() > 0){
+            if ($query->rowCount() > 0) {
                 $arr = $query->fetchAll(PDO::FETCH_ASSOC);
                 return $arr;
-            }else{
+            } else {
                 echo "insert failt";
             }
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo $e->getMessage();
-        }        
+        }
     }
-    function showtable(){
+    function showtable()
+    {
         $result = $this->selectheoDeBai($this->sqlSelectDB2);
         $arrTT = array_keys((array)$result[0]);
         // return json_encode($result);
         echo "<table style='border: 1px solid black;'>";
+        echo "<tr>";
+        for ($i = 0; $i < count($arrTT); $i++) {
+            echo "<th>$arrTT[$i]</th>";
+        }
+        echo "</tr>";
+        for ($i = 0; $i < count($result); $i++) {
+            $arrChild = array_values((array)$result[$i]);
             echo "<tr>";
-                for ($i=0; $i < count($arrTT); $i++) { 
-                    echo "<th>$arrTT[$i]</th>";
-                }
-            echo "</tr>";
-            for ($i=0; $i < count($result); $i++) { 
-                $arrChild = array_values((array)$result[$i]);
-                echo "<tr>";
-                    for ($j=0; $j < count($arrChild); $j++) { 
-                        echo "<td>$arrChild[$j]</td>";
-                    }
-                echo "</tr>";
+            for ($j = 0; $j < count($arrChild); $j++) {
+                echo "<td>$arrChild[$j]</td>";
             }
+            echo "</tr>";
+        }
         echo "</table>";
     }
-    function showtableALL($sql){
-        try{
+    function showtableALL($sql)
+    {
+        try {
             $conn = $this->getConn();
             $query = $conn->prepare($sql);
-            $query->bindParam(":max",$max);
+            $query->bindParam(":max", $max);
             $query->execute();
-            if($query->rowCount() > 0){
+            if ($query->rowCount() > 0) {
                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
                 $arrTT = array_keys((array)$result[0]);
                 // return json_encode($result);
                 echo "<table style='border: 1px solid black;'>";
+                echo "<tr>";
+                for ($i = 0; $i < count($arrTT); $i++) {
+                    echo "<th>$arrTT[$i]</th>";
+                }
+                echo "</tr>";
+                for ($i = 0; $i < count($result); $i++) {
+                    $arrChild = array_values((array)$result[$i]);
                     echo "<tr>";
-                        for ($i=0; $i < count($arrTT); $i++) { 
-                            echo "<th>$arrTT[$i]</th>";
-                        }
-                    echo "</tr>";
-                    for ($i=0; $i < count($result); $i++) { 
-                        $arrChild = array_values((array)$result[$i]);
-                        echo "<tr>";
-                            for ($j=0; $j < count($arrChild); $j++) { 
-                                echo "<td>$arrChild[$j]</td>";
-                            }
-                        echo "</tr>";
+                    for ($j = 0; $j < count($arrChild); $j++) {
+                        echo "<td>$arrChild[$j]</td>";
                     }
+                    echo "</tr>";
+                }
                 echo "</table>";
-            }else{
+            } else {
                 echo "insert failt";
             }
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo $e->getMessage();
-        } 
+        }
     }
 }
-?>
