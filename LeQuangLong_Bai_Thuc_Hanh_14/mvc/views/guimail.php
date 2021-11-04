@@ -12,6 +12,12 @@
         <?php require_once "block/header.php"; ?>
         <?php require_once "block/headerMobile.php"; ?>
     </header>
+        <?php 
+                    echo "=================================================";
+                    echo "<h1>vao setting nhap gmail va matkhau truoc khi tien hanh gui ^_^ !!! </h1>";
+                    echo "<span>xampp/htdocs/LeQuangLong_Bai_Thuc_Hanh_14/mvc/models/guiMailModel.php</span>";
+                    echo "<br>=================================================<br>";
+        ?>
     <!-- Hero/Intro Slider Start -->
         <label for="">Địa Chỉ Mail</label><input type="text" id="diachimail">
         <label for="">Tiêu Đề</label><input type="text" id="tieude">

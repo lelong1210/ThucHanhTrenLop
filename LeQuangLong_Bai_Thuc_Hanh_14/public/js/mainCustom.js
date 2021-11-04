@@ -6,15 +6,15 @@ $(document).ready(function () {
         var tieude = $("#tieude").val();
         var bodyconten = $("#noidung").val();
         var linkanh = uploadImg();
-        if(linkanh){
-            if(guiMail(tieude,diachigui,bodyconten,linkanh)){
-                alert("đã gửi mail");
-            }else{
-                alert("gửi mail thất bại");
-            }
-        }else{
-            alert("gửi mail thất bại");
-        }
+        // if(linkanh){
+        //     if(guiMail(tieude,diachigui,bodyconten,linkanh)){
+        //         alert("đã gửi mail");
+        //     }else{
+        //         alert("gửi mail thất bại");
+        //     }
+        // }else{
+        //     alert("gửi mail thất bại");
+        // }
 
         
     });
@@ -32,6 +32,7 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function(response){
+                alert(response);
                 result = response;
             },
         });
